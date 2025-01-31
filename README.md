@@ -1,13 +1,37 @@
-##  Lab: Building Intuition For DNS
+## Understanding DNS – A Hands-On Lab for Beginners
 
 ![image](https://github.com/user-attachments/assets/c0cc2cca-ec54-47df-bb80-0dc27ca297cc)
 
-
 ### Overview
-This lab will help you understand DNS (Domain Name System) by experimenting with A Records, DNS Cache, and CNAME Records. You will create DNS records, observe their behavior, and flush the cache when changes are made. At the end of this Lab you should have a pictoral working knowledge of DNS hierarchical system .
+This lab will help you understand DNS (Domain Name System) by experimenting with:
+- A Records (Mapping names to IPs)
+- DNS Cache (How computers store DNS information)
+- CNAME Records (Aliases for domain names)
+By the end of this lab, you’ll see how DNS works in real time and build a clear mental picture of the DNS hierarchy.
 
-### What IS A DNS
-Domain Name System (DNS) is a service that translates human-friendly domain names (such as google.com) into machine-readable IP addresses (such as 142.250.192.142). This allows us to easily remember and access websites. DNS works by using a hierarchical system of nameservers, each responsible for a specific portion of the domain name: When a user types a domain name into their browser, the request is first sent to a resolver. The resolver first checks its cache for the domain name in question. If the domain name is not found in the cache, the resolver sends the query to the root server.
+### What is DNS? (Explained Simply)
+Think of DNS as the phonebook of the internet. It translates human-friendly names (like google.com) into machine-friendly IP addresses (like 142.250.192.142).
+- Without DNS, you’d have to memorize IP addresses instead of website names!
+
+### How DNS Works (Step-by-Step)
+1️ You type a website (e.g., google.com) into your browser.
+
+2️ Your computer asks a DNS Resolver (like your ISP) if it knows the IP.
+
+3️ If it doesn’t know, it asks the Root Server (top of the hierarchy).
+
+4️ The Root Server directs the request to a TLD Server (e.g., .com server).
+
+5️ The TLD Server points to Google’s DNS Server, which knows the exact IP.
+
+6️ Your browser connects to 142.250.192.142, and Google loads!
+
+### What You’ll Do in This Lab
+In this lab, you will:
+- Create an A Record (maps a name to an IP)
+- Experiment with the DNS Cache (how computers remember DNS)
+- Set up a CNAME Record (aliases one domain name to another)
+Let’s get started! 
 
 ### Lab Environment
 -  Microsoft Azure Virtual Machines
@@ -36,8 +60,8 @@ RDP into Client-1 as an Admin (mydomain.com\adminuser).
 -  Try to ping mainframe by running:
 -  ping mainframe
 ❌ It should fail because mainframe does not exist in DNS.
-![image](https://github.com/user-attachments/assets/ef1d427d-fe04-4aef-8251-3eaaf3d3c978)
 
+![image](https://github.com/user-attachments/assets/ef1d427d-fe04-4aef-8251-3eaaf3d3c978)
 
 ### Create A Record for "mainframe"
 -  On DC-1, open Server Manager.
@@ -54,7 +78,7 @@ RDP into Client-1 as an Admin (mydomain.com\adminuser).
 ### Test DNS Resolution On Client-1
 On Client-1, open Command Prompt (cmd).
 -  ping mainframe
-It should now reply from 10.0.1.4.
+- It should now reply from 10.0.1.4.
 
 ### Exercise 2: Observing Local DNS Cache
 -  Change the A Record of "mainframe"
@@ -66,23 +90,26 @@ It should now reply from 10.0.1.4.
 -  On Client-1, open Command Prompt.
 Run:
 ping mainframe
+
 ❌ It still pings the old IP (10.0.1.4) instead of 8.8.8.8
+
 ![image](https://github.com/user-attachments/assets/1c85dfff-a1f0-4146-b690-a4528535ff65)
 ![](https://i.imgur.com/DmD03ts.png)
+
 -  Check the DNS cache:
   -  ipconfig /displaydns
 Observe that mainframe is still cached.
 -  Flush the DNS Cache
 -  On Client-1, run:
 -  ipconfig /flushdns
-  the is clears the cache.
+  this will clears the cache.
 ![image](https://github.com/user-attachments/assets/d847d49b-7c7b-4f09-a684-20f55c3eeb63)
 
 Try pinging again:
 -  ping mainframe
   It should now resolve to 8.8.8.8.
-![image](https://github.com/user-attachments/assets/fd43c4c1-556a-4528-8219-86fee80a5ec9)
 
+![image](https://github.com/user-attachments/assets/fd43c4c1-556a-4528-8219-86fee80a5ec9)
 
 ###  Exercise 3: Configuring a CNAME Record
 -  Create a CNAME Record for "search"
@@ -103,6 +130,7 @@ On Client-1, open Command Prompt.
 -  ping search
   -  it may not work, because www.google.com blocks ICMP (ping).
 Use nslookup search
+
 ![image](https://github.com/user-attachments/assets/2d27b96e-79c7-482d-811f-3110dc92d8fe)
 ![image](https://github.com/user-attachments/assets/26371e75-3dcb-4e8c-9ab8-39af67c98576)
 
