@@ -11,7 +11,7 @@ This lab will help you understand DNS (Domain Name System) by experimenting with
 -  DC-1 (Domain Controller, DNS Server) same we used in our pravious lab
 -  Client-1 (Joined to the Domain)
 -  Remote Desktop Connection (RDP)
--  Windows 11 (21H2)
+-  Windows 11 (22Hz)
 
 ###  Prerequisites
 -  Active Directory (AD) Virtual Machine (DC-1)
