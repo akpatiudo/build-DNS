@@ -4,7 +4,10 @@
 
 
 ### Overview
-This lab will help you understand DNS (Domain Name System) by experimenting with A Records, DNS Cache, and CNAME Records. You will create DNS records, observe their behavior, and flush the cache when changes are made.
+This lab will help you understand DNS (Domain Name System) by experimenting with A Records, DNS Cache, and CNAME Records. You will create DNS records, observe their behavior, and flush the cache when changes are made. At the end of this Lab you should have a pictoral working knowledge of DNS hierarchical system .
+
+### What IS A DNS
+Domain Name System (DNS) is a service that translates human-friendly domain names (such as google.com) into machine-readable IP addresses (such as 142.250.192.142). This allows us to easily remember and access websites. DNS works by using a hierarchical system of nameservers, each responsible for a specific portion of the domain name: When a user types a domain name into their browser, the request is first sent to a resolver. The resolver first checks its cache for the domain name in question. If the domain name is not found in the cache, the resolver sends the query to the root server.
 
 ### Lab Environment
 -  Microsoft Azure Virtual Machines
@@ -107,4 +110,15 @@ Use nslookup search
 In this lab, we successfully: ✅ Created an A Record (mainframe) and observed its resolution.
 ✅ Examined the DNS cache, changed a record, and flushed the cache.
 ✅ Created a CNAME Record (search → www.google.com) and tested it.
+
+### The Voyage Of A DNS Request
+- The client initiates the query by typing a domain name into the browser.
+- The query is sent to the resolver.
+- The resolver checks its cache for the domain name.
+- If the domain name is found in the cache, the resolver returns the IP address to the client.
+- If the domain name is not found in the cache, the resolver sends the query to the root server.
+- The root server responds with the IP address of the TLD server.
+- The TLD server responds with the IP address of the authoritative nameserver.
+- The authoritative nameserver looks up the domain name in its host files and returns the IP address to the resolver.
+- The resolver returns the IP address to the client.
 
